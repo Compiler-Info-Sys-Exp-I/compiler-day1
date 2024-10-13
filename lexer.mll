@@ -5,11 +5,12 @@ exception Eof      (* Defition of exception *)
 }
 
 rule token = parse
-  [' ' '\t']     { token lexbuf }     (* skip blanks *)
+| [' ']          { token lexbuf  }
+| ['\t']         { token lexbuf  }
 | ['\n' ]        { EOL }
 | ['0'-'9']+     { INT(int_of_string(Lexing.lexeme lexbuf)) }
 | '+'            { PLUS }
-| '*'            { TIMES }
+| '*'            { TIMES  }
 | '('            { LPAREN }
 | ')'            { RPAREN }
 | eof            { raise Eof }
